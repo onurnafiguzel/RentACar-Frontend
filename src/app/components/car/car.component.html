@@ -1,0 +1,54 @@
+<div class="mb-3">
+  <label for="filterText" class="form-label">Araç ara</label>
+  <input
+    type="text"
+    style="width: 250px"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Araç adı giriniz"
+  />
+</div>
+
+<app-car-filter></app-car-filter>
+
+<table class="table table-success table-stripped">
+  <thead>
+    <tr>
+      <th scope="col">Car Id</th>
+      <th scope="col">Car name</th>
+      <th scope="col">Brand name</th>
+      <th scope="col">Color name</th>
+      <th scope="col">Model year</th>
+      <th scope="col">Daily price</th>
+      <th scope="col">Daily price with tax</th>
+      <th scope="col">Description</th>
+      <th scope="col">Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of cars | filterPipe: filterText">
+      <th scope="row">{{ car.carId }}</th>
+      <td>{{ car.carName | uppercase }}</td>
+      <td>{{ car.brandName }}</td>
+      <td>{{ car.colorName }}</td>
+      <td>{{ car.modelYear }}</td>
+      <td>{{ car.dailyPrice | currency }}</td>
+      <td>{{ car.dailyPrice | vatAdded: 10 | currency }}</td>
+      <td>{{ car.description }}</td>
+      <td>
+        <div class="card-body">
+          <section style="float: left">
+            <button
+              routerLink="/cars/car/{{ car.carId }}"
+              type="button"
+              class="btn btn-primary"
+            >
+              Details
+            </button>
+          </section>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

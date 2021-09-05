@@ -1,0 +1,13 @@
+<ul class="list-group">
+  <li routerLink="/colors/getall" class="btn btn-secondary">Tüm Renkler</li>
+  <li
+    (click)="setCurrentColor(color)"
+    routerLink="/cars/color/{{color.colorId}}"
+    *ngFor="let color of colors"
+    [class]="getCurrentColorClass(color)"
+  >
+    {{ color.name }}
+  </li>
+</ul>
+
+<h5 *ngIf="currentColor">{{ currentColor.name }} seçildi</h5>
